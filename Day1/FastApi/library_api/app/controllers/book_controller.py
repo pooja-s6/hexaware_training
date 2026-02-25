@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Depends
-from app.dependencies.book_dependency import get_book_service
 from app.services.book_service import BookService
 
 router = APIRouter()
