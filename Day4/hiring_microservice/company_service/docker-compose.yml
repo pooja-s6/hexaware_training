@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  company_service:
+    build: .
+    container_name: company_service
+    env_file:
+      - .env.docker
+    ports:
+      - "8003:8000"
+    depends_on:
+      - db
+    restart: always
+    networks:
+      - company_network
+
+  db:
+    image: postgres:15
+    container_name: company_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pooja521689
+      POSTGRES_DB: companydb
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - company_network
+ 
+networks:
+  company_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
